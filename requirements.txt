@@ -1,0 +1,15 @@
+numpy
+aiochclient
+httpx[http2]
+tritonclient[all]
+pandas
+python-dotenv
+nest_asyncio
+kmodes
+scikit-learn
+matplotlib
+scipy
+umap-learn
+seaborn
+plotly
+gower

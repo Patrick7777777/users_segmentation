@@ -13,3 +13,6 @@ umap-learn
 seaborn
 plotly
 gower
+prince
+permetrics
+hyperopt

@@ -16,3 +16,4 @@ gower
 prince
 permetrics
 hyperopt
+deepchecks

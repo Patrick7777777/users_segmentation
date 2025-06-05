@@ -199,4 +199,5 @@ preprocessed_configs/
 local.env
 .vscode/
 *.csv
+*.sql
 

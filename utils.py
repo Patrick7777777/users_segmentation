@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
+import umap.umap_ as umap
+from gower import gower_matrix
+from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 from scipy.spatial.distance import hamming
 from itertools import combinations
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
@@ -54,6 +57,29 @@ def inter_cluster_distance(centroids):
         distances.append(hamming(c1, c2))
     return np.mean(distances)
 
+
+def draw_clusters(dataframe: pd.DataFrame):
+    encoder = OneHotEncoder(sparse_output=False)
+    encoded = encoder.fit_transform(dataframe)
+    reducer = umap.UMAP()
+    _emb = reducer.fit_transform(encoded)
+    plt.figure(figsize=(5, 5))
+    sns.scatterplot(
+        x=_emb[:, 0],
+        y=_emb[:, 1],
+        alpha=0.7
+    )
+    plt.title('UMAP')
+    plt.tight_layout()
+    plt.show()
+
+
+def scores_calc(dataframe, clrs, metric):
+    gm = gower_matrix(dataframe)
+    shi = silhouette_score(gm, clrs, metric=metric)
+    chi = calinski_harabasz_score(gm, clrs)
+    dbi = davies_bouldin_score(gm, clrs)
+    return shi, chi, dbi
 
 
 
